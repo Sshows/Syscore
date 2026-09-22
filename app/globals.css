@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@config "../tailwind.config.mjs";
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-graphite: #1e2328;
+  --color-mint: #3ed6a8;
+  --font-sans: var(--font-manrope);
+}
+
+html,
+body {
+  background-color: var(--color-background);
+  color: var(--color-graphite);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
