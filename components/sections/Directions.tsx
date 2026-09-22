@@ -14,14 +14,14 @@ export function Directions() {
   return (
     <section
       id={directions.id}
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
+      className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28"
     >
       <Reveal>
         <PlanBadge label={directions.badge} />
-        <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
+        <h2 className="mt-5 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           {directions.title}
         </h2>
-        <p className="text-graphite/75 mt-4 max-w-3xl text-base leading-7">
+        <p className="mt-4 max-w-3xl text-base leading-7 text-white/60">
           {directions.description}
         </p>
       </Reveal>
@@ -30,7 +30,7 @@ export function Directions() {
           const open = openId === item.id;
           return (
             <Reveal key={item.id}>
-              <article className="border-graphite/10 hover:border-mint/40 rounded-3xl border bg-white transition-colors">
+              <article className="tech-card group rounded-3xl transition duration-300">
                 <button
                   type="button"
                   className="flex w-full items-start justify-between gap-4 px-5 py-5 text-left sm:px-7 sm:py-6"
@@ -41,10 +41,10 @@ export function Directions() {
                     <p className="text-mint text-xs font-semibold tracking-[0.16em]">
                       {item.number}
                     </p>
-                    <h3 className="mt-2 text-xl font-semibold sm:text-2xl">
+                    <h3 className="mt-2 text-xl font-semibold text-white sm:text-2xl">
                       {item.title}
                     </h3>
-                    <p className="text-graphite/70 mt-2 text-sm leading-6">
+                    <p className="mt-2 text-sm leading-6 text-white/58">
                       {item.summary}
                     </p>
                   </div>
@@ -59,14 +59,14 @@ export function Directions() {
                 >
                   <div className="min-h-0">
                     <div className="space-y-4 px-5 pb-6 sm:px-7">
-                      <p className="text-graphite/75 text-sm leading-7">
+                      <p className="text-sm leading-7 text-white/65">
                         {item.description}
                       </p>
                       <ul className="flex flex-wrap gap-2">
                         {item.concepts.map((concept) => (
                           <li
                             key={concept}
-                            className="bg-graphite/5 text-graphite/80 rounded-full px-3 py-1 text-xs"
+                            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/65"
                           >
                             {concept}
                           </li>

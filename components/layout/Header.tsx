@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ButtonLink } from "@/components/ui/Button";
 import { siteContent } from "@/content/site-content";
 
 export function Header() {
@@ -42,10 +43,10 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="border-graphite/10 bg-background/90 sticky top-0 z-40 border-b backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0b1013]/75 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/#top" className="text-lg font-semibold tracking-tight">
-          {siteContent.brand.name}
+          <span className="text-white">SYS</span><span className="text-mint">CORE</span>
         </Link>
         <nav
           className="hidden items-center gap-8 md:flex"
@@ -58,16 +59,17 @@ export function Header() {
               className={`text-sm transition-colors ${
                 activeId === item.id
                   ? "text-mint font-semibold"
-                  : "text-graphite/70 hover:text-graphite"
+                  : "text-white/60 hover:text-white"
               }`}
             >
               {item.label}
             </Link>
           ))}
+          <ButtonLink href="#directions" className="px-4 py-2 text-xs">Открыть направления</ButtonLink>
         </nav>
         <button
           type="button"
-          className="border-graphite/15 inline-flex h-10 w-10 items-center justify-center rounded-md border md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((value) => !value)}
@@ -77,13 +79,13 @@ export function Header() {
           </span>
           <span className="flex flex-col gap-1.5">
             <span
-              className={`bg-graphite block h-0.5 w-5 transition ${open ? "translate-y-2 rotate-45" : ""}`}
+              className={`block h-0.5 w-5 bg-white transition ${open ? "translate-y-2 rotate-45" : ""}`}
             />
             <span
-              className={`bg-graphite block h-0.5 w-5 transition ${open ? "opacity-0" : ""}`}
+              className={`block h-0.5 w-5 bg-white transition ${open ? "opacity-0" : ""}`}
             />
             <span
-              className={`bg-graphite block h-0.5 w-5 transition ${open ? "-translate-y-2 -rotate-45" : ""}`}
+              className={`block h-0.5 w-5 bg-white transition ${open ? "-translate-y-2 -rotate-45" : ""}`}
             />
           </span>
         </button>
@@ -91,14 +93,14 @@ export function Header() {
       {open ? (
         <div
           id="mobile-menu"
-          className="border-graphite/10 bg-background border-t px-4 py-6 md:hidden"
+          className="border-t border-white/10 bg-[#0b1013] px-4 py-6 md:hidden"
         >
           <nav className="flex flex-col gap-4" aria-label="Мобильное меню">
             {siteContent.nav.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
-                className={`text-base ${activeId === item.id ? "text-mint font-semibold" : "text-graphite"}`}
+                className={`text-base ${activeId === item.id ? "text-mint font-semibold" : "text-white/80"}`}
                 onClick={() => setOpen(false)}
               >
                 {item.label}

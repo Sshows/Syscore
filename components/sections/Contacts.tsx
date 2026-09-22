@@ -11,36 +11,36 @@ export function Contacts() {
   return (
     <section
       id={contacts.id}
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
+      className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28"
     >
       <Reveal>
         <PlanBadge label={contacts.status} />
-        <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-          {contacts.title}
+        <h2 className="mt-5 max-w-2xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          Сильная защита начинается с диалога.
         </h2>
-        <p className="text-graphite/75 mt-4 max-w-2xl text-base leading-7">
+        <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
           {contacts.description}
         </p>
       </Reveal>
-      <Reveal className="mt-10 max-w-xl">
+      <Reveal className="tech-card relative mt-10 max-w-xl overflow-hidden rounded-3xl">
         <form
-          className="border-graphite/10 space-y-4 rounded-3xl border p-6"
+          className="space-y-4 p-6"
           onSubmit={(event) => event.preventDefault()}
         >
-          <p className="text-graphite/70 text-sm leading-6">
+          <p className="text-sm leading-6 text-white/60">
             {contacts.formNotice}
           </p>
-          <label className="block text-sm">
+          <label className="block text-sm text-white/85">
             <span className="mb-2 block font-medium">
               {contacts.form.nameLabel}
             </span>
             <input
               disabled
               placeholder={contacts.form.namePlaceholder}
-              className="border-graphite/15 bg-graphite/5 w-full rounded-xl border px-3 py-3 text-sm"
+              className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm text-white"
             />
           </label>
-          <label className="block text-sm">
+          <label className="block text-sm text-white/85">
             <span className="mb-2 block font-medium">
               {contacts.form.emailLabel}
             </span>
@@ -48,10 +48,10 @@ export function Contacts() {
               disabled
               type="email"
               placeholder={contacts.form.emailPlaceholder}
-              className="border-graphite/15 bg-graphite/5 w-full rounded-xl border px-3 py-3 text-sm"
+              className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm text-white"
             />
           </label>
-          <label className="block text-sm">
+          <label className="block text-sm text-white/85">
             <span className="mb-2 block font-medium">
               {contacts.form.messageLabel}
             </span>
@@ -59,7 +59,7 @@ export function Contacts() {
               disabled
               rows={4}
               placeholder={contacts.form.messagePlaceholder}
-              className="border-graphite/15 bg-graphite/5 w-full rounded-xl border px-3 py-3 text-sm"
+              className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm text-white"
             />
           </label>
           <Button type="submit" disabled>

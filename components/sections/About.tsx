@@ -7,26 +7,27 @@ export function About() {
   return (
     <section
       id={about.id}
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
+      className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28"
     >
       <Reveal>
-        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          {about.title}
+        <p className="text-xs font-bold tracking-[.2em] text-mint">ABOUT SYSCORE</p>
+        <h2 className="mt-4 max-w-4xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          Технологии сильнее, когда за ними — подготовленные люди.
         </h2>
-        <p className="text-graphite/75 mt-4 max-w-3xl text-base leading-7">
+        <p className="mt-5 max-w-3xl text-base leading-8 text-white/60">
           {about.lead}
         </p>
-        <h3 className="mt-12 text-xl font-semibold">{about.principlesTitle}</h3>
+        <div className="mt-12 flex max-w-2xl flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[.03] p-5 text-xs font-bold tracking-[.13em]"><span className="text-white/70">TECHNOLOGY</span><span className="text-mint">↔</span><span className="text-white/70">PEOPLE</span><span className="text-mint">↔</span><span className="text-white/70">SECURITY</span></div><h3 className="mt-12 text-xl font-semibold text-white">{about.principlesTitle}</h3>
       </Reveal>
       <div className="mt-6 grid gap-6 md:grid-cols-3">
         {about.principles.map((principle) => (
           <Reveal key={principle.number}>
-            <article className="border-graphite/10 h-full rounded-3xl border p-6">
+            <article className="tech-card h-full rounded-3xl p-6">
               <p className="text-mint text-sm font-semibold tracking-[0.18em]">
                 {principle.number}
               </p>
-              <h3 className="mt-3 text-lg font-semibold">{principle.title}</h3>
-              <p className="text-graphite/75 mt-3 text-sm leading-7">
+              <h3 className="mt-3 text-lg font-semibold text-white">{principle.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-white/60">
                 {principle.description}
               </p>
             </article>
