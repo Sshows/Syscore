@@ -17,6 +17,7 @@ export const siteContent = {
       "050000, г. Алматы, Бостандыкский район, пр. Абая, д. 52В, офис 724",
     phone: "+7 702 777 61 81",
     phoneHref: "tel:+77027776181",
+    whatsappHref: "https://wa.me/77027776181",
   },
 
   seo: {
@@ -29,17 +30,18 @@ export const siteContent = {
   nav: [
     { id: "directions", href: "/#directions", label: "Направления" },
     { id: "about", href: "/#about", label: "О проекте" },
+    { id: "company", href: "/#company", label: "Компания" },
     { id: "education", href: "/#education", label: "Образование" },
     { id: "contacts", href: "/#contacts", label: "Контакты" },
   ],
 
   hero: {
     eyebrow: "Проект готовится к запуску",
-    title: "Syscore",
+    title: "Безопасность начинается с ядра.",
     subtitle: "System Security Core",
     description:
       "Центр кибербезопасности в Казахстане. Мы готовим инфраструктуру для двух задач: защита бизнеса и подготовка специалистов. Услуги и образовательные программы находятся на этапе планирования.",
-    ctaLabel: "Открыть направления",
+    ctaLabel: "Explore security",
     ctaHref: "#directions",
     companyStatus: 'ТОО «SYSCORE»',
     registrationStatus: "REGISTERED / KAZAKHSTAN",
@@ -48,6 +50,22 @@ export const siteContent = {
       "FIELD / CYBERSECURITY",
       "LOCATION / ALMATY",
     ],
+    whatsappLabel: "WhatsApp ↗",
+  },
+
+  interface: {
+    mapTitle: "THREAT LANDSCAPE",
+    mapNotice: "CONCEPTUAL SECURITY VISUALIZATION / VISUAL ONLY",
+    terminalTitle: "SYSCORE / CORE",
+    terminalLines: [
+      "initializing security architecture",
+      "loading threat intelligence concept",
+      "loading incident response concept",
+      "preparing education layer",
+      "system architecture ready",
+    ],
+    terminalStatus: "PRE-LAUNCH",
+    floatingLabel: "CONTACT CORE",
   },
 
   positioning: {

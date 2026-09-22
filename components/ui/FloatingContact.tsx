@@ -1,0 +1,2 @@
+import { siteContent } from "@/content/site-content";
+export function FloatingContact() { const { company, interface: copy } = siteContent; return <a href={company.whatsappHref} target="_blank" rel="noreferrer" className="floating-contact"><span className="signal-dot h-2 w-2 rounded-full bg-mint" /><span className="hidden sm:block"><b>SYSCORE</b><small>{copy.floatingLabel} · WhatsApp ↗</small></span><span className="sm:hidden">↗</span></a>; }

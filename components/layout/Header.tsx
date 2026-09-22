@@ -65,7 +65,7 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <ButtonLink href="#directions" className="px-4 py-2 text-xs">Открыть направления</ButtonLink>
+          <ButtonLink href={siteContent.company.whatsappHref} target="_blank" rel="noreferrer" className="px-4 py-2 text-xs">WhatsApp ↗</ButtonLink>
         </nav>
         <button
           type="button"
@@ -96,7 +96,7 @@ export function Header() {
           className="border-t border-white/10 bg-[#0b1013] px-4 py-6 md:hidden"
         >
           <nav className="flex flex-col gap-4" aria-label="Мобильное меню">
-            {siteContent.nav.map((item) => (
+          {siteContent.nav.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
@@ -105,7 +105,8 @@ export function Header() {
               >
                 {item.label}
               </Link>
-            ))}
+          ))}
+          <ButtonLink href={siteContent.company.whatsappHref} target="_blank" rel="noreferrer" className="w-full">WhatsApp ↗</ButtonLink>
           </nav>
         </div>
       ) : null}

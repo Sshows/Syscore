@@ -30,7 +30,8 @@ export function Directions() {
           const open = openId === item.id;
           return (
             <Reveal key={item.id}>
-              <article className="tech-card group rounded-3xl transition duration-300">
+              <article className="tech-card group relative overflow-hidden rounded-3xl transition duration-300">
+                <span className="pointer-events-none absolute -top-7 right-4 text-8xl font-bold tracking-tighter text-white/[.035]">{item.number}</span>
                 <button
                   type="button"
                   className="flex w-full items-start justify-between gap-4 px-5 py-5 text-left sm:px-7 sm:py-6"
@@ -47,6 +48,7 @@ export function Directions() {
                     <p className="mt-2 text-sm leading-6 text-white/58">
                       {item.summary}
                     </p>
+                    <p className="mt-4 text-[10px] font-bold tracking-[.16em] text-mint/75">CONCEPT / PRE-LAUNCH</p>
                   </div>
                   <span className="text-mint mt-1" aria-hidden>
                     {open ? "–" : "+"}
