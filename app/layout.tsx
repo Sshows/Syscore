@@ -4,10 +4,11 @@ import { Header } from "@/components/layout/Header";
 import { siteContent } from "@/content/site-content";
 import "./globals.css";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: siteContent.seo.title,
     template: `%s — ${siteContent.brand.name}`,
