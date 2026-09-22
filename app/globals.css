@@ -5,7 +5,7 @@
   --color-background: #ffffff;
   --color-graphite: #1e2328;
   --color-mint: #3ed6a8;
-  --font-sans: var(--font-manrope);
+  --font-sans: "Manrope", "Segoe UI", Arial, sans-serif;
 }
 
 html {

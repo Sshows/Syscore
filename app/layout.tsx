@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { siteContent } from "@/content/site-content";
 import "./globals.css";
-
-const manrope = Manrope({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-manrope",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -40,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ru" className={manrope.variable}>
+    <html lang="ru">
       <body className="bg-background text-graphite min-h-screen font-sans antialiased">
         <Header />
         <main>{children}</main>

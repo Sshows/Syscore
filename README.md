@@ -43,7 +43,7 @@ npm run format
 ## Где менять цвета и шрифт
 
 - Цвета и семейство шрифта: `tailwind.config.mjs` и `app/globals.css`
-- Подключение Manrope: `app/layout.tsx` (`next/font/google`)
+- Шрифтовой стек: `app/globals.css` (без сетевой загрузки шрифта, чтобы сборка не зависела от Google Fonts)
 
 Акцент: мятный `#3ED6A8`. Текст: графитовый `#1E2328`. Фон: белый.
 
