@@ -68,6 +68,47 @@ export const siteContent = {
     floatingLabel: "CONTACT CORE",
   },
 
+  whySyscore: {
+    title: "ONE CORE — TWO DIRECTIONS",
+    chain: ["Technology", "Processes", "People", "Security"],
+    items: [
+      { number: "01", title: "PROTECT", text: "Security for business" },
+      { number: "02", title: "PREPARE", text: "Education for people" },
+    ],
+  },
+
+  operations: {
+    title: "SECURITY OPERATIONS",
+    notice: "CONCEPTUAL SECURITY VISUALIZATION",
+    nodes: ["NETWORK", "SOC", "THREAT INTELLIGENCE", "INCIDENT RESPONSE"],
+  },
+
+  research: {
+    title: "RESEARCH & INTELLIGENCE",
+    status: "RESEARCH MODULE / PREPARING",
+    items: [
+      "THREAT INTELLIGENCE",
+      "SECURITY RESEARCH",
+      "APPLIED ANALYSIS",
+      "PRACTICAL CASES",
+    ],
+  },
+
+  timeline: {
+    title: "SYSCORE / TIMELINE",
+    items: [
+      ["09.2026", "COMPANY REGISTERED"],
+      ["09.2026", "SYSCORE CORE FORMED"],
+      ["2026 →", "LAUNCH PREPARATION"],
+      ["NEXT", "SECURITY & EDUCATION PROGRAMS / PLANNED"],
+    ],
+  },
+
+  imageSlots: [
+    { id: "hero", label: "REAL VISUAL / HERO", note: "Space reserved for a verified Syscore photo" },
+    { id: "education", label: "REAL VISUAL / EDUCATION", note: "Space reserved for a verified lab or learning photo" },
+  ],
+
   positioning: {
     id: "positioning",
     title: "Позиционирование",

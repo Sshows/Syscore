@@ -70,6 +70,8 @@ body::before {
 .map-land { fill: rgb(255 255 255 / .035); stroke: rgb(255 255 255 / .14); stroke-width: 1; }.map-routes path { fill:none; stroke:#3ed6a8; stroke-width:1.2; stroke-dasharray:6 9; animation:route 8s linear infinite; }.map-points circle { fill:#3ed6a8; filter:drop-shadow(0 0 7px #3ed6a8); }.map-points circle:first-child { animation: node 2s infinite; }
 .terminal-panel { border: 1px solid rgb(62 214 168 / .22); background: #070b0d; box-shadow: inset 0 0 50px rgb(62 214 168 / .035); }.terminal-line { opacity:0; animation: terminal-in .4s ease forwards; }
 .floating-contact { position:fixed; z-index:30; right:1.25rem; bottom:1.25rem; display:flex; align-items:center; gap:.6rem; border:1px solid rgb(62 214 168 / .35); border-radius:999px; background:rgb(11 16 19 / .88); padding:.7rem .9rem; color:#fff; box-shadow:0 8px 30px rgb(0 0 0 / .35); backdrop-filter:blur(14px); transition:transform .25s ease,border-color .25s ease; }.floating-contact:hover{ transform:translateY(-3px); border-color:#3ed6a8; }.floating-contact b,.floating-contact small { display:block; font-size:10px; letter-spacing:.12em; }.floating-contact small { margin-top:2px; color:rgb(255 255 255 / .52); font-size:8px; }
+.operations-core { box-shadow: 0 0 0 20px rgb(62 214 168 / .035), 0 0 55px rgb(62 214 168 / .18); animation: core-breathe 4s ease-in-out infinite; }
+.image-slot { min-height: 230px; border: 1px dashed rgb(62 214 168 / .32); background: linear-gradient(135deg, rgb(62 214 168 / .06), transparent 55%), repeating-linear-gradient(90deg, transparent, transparent 24px, rgb(255 255 255 / .025) 25px); }
 
 @keyframes pulse-signal { 50% { opacity: 0.52; transform: scale(1.22); } }
 @keyframes scan { from { transform: translateY(-130%); } to { transform: translateY(430%); } }
@@ -78,6 +80,7 @@ body::before {
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes node { 50% { opacity:.45; transform:scale(1.45); } }
 @keyframes terminal-in { to { opacity:1; transform:none; } from { transform:translateX(-7px); } }
+@keyframes core-breathe { 50% { box-shadow: 0 0 0 30px rgb(62 214 168 / .02), 0 0 75px rgb(62 214 168 / .28); } }
 
 section[id] {
   scroll-margin-top: 5.5rem;
@@ -117,5 +120,5 @@ section[id] {
     scroll-behavior: auto !important;
   }
 
-  .signal-dot, .scan-line, .float-slow, .core-lines path, .core-rings circle, .core-nodes circle, .map-routes path, .map-points circle, .terminal-line { animation: none; }
+  .signal-dot, .scan-line, .float-slow, .core-lines path, .core-rings circle, .core-nodes circle, .map-routes path, .map-points circle, .terminal-line, .operations-core { animation: none; }
 }

@@ -1,0 +1,3 @@
+import { Reveal } from "@/components/ui/Reveal";
+import { siteContent } from "@/content/site-content";
+export function Timeline() { const { timeline } = siteContent; return <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28"><Reveal><p className="text-xs font-bold tracking-[.2em] text-mint">{timeline.title}</p></Reveal><div className="relative mt-10 border-l border-mint/35 pl-8 sm:ml-8">{timeline.items.map(([date, label]) => <Reveal key={label} className="relative pb-10 last:pb-0"><span className="absolute -left-[2.28rem] top-1 h-3 w-3 rounded-full border border-mint bg-[#0b1013]" /><p className="text-xs font-bold tracking-[.18em] text-mint">{date}</p><p className="mt-2 text-lg font-semibold text-white">{label}</p></Reveal>)}</div></section>; }

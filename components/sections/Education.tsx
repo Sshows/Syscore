@@ -1,6 +1,7 @@
 import { PlanBadge } from "@/components/ui/PlanBadge";
 import { Reveal } from "@/components/ui/Reveal";
 import { siteContent } from "@/content/site-content";
+import { ImageSlot } from "@/components/ui/ImageSlot";
 
 export function Education() {
   const { education } = siteContent;
@@ -43,6 +44,9 @@ export function Education() {
             {education.cooperation.text}
           </p>
         </article>
+      </Reveal>
+      <Reveal className="mt-8">
+        <ImageSlot id="education" />
       </Reveal>
     </section>
   );
