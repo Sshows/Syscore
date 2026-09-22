@@ -5,6 +5,20 @@ export const siteContent = {
     country: "Казахстан",
   },
 
+  company: {
+    legalName: 'ТОО «SYSCORE»',
+    bin: "260940014470",
+    registrationDate: "11.09.2026",
+    oked: "62092",
+    activity: "Деятельность в области кибербезопасности",
+    director: "Сысоев Аскар Какенович",
+    location: "Almaty, Kazakhstan",
+    address:
+      "050000, г. Алматы, Бостандыкский район, пр. Абая, д. 52В, офис 724",
+    phone: "+7 702 777 61 81",
+    phoneHref: "tel:+77027776181",
+  },
+
   seo: {
     title: "Syscore — System Security Core",
     description:
@@ -27,6 +41,13 @@ export const siteContent = {
       "Центр кибербезопасности в Казахстане. Мы готовим инфраструктуру для двух задач: защита бизнеса и подготовка специалистов. Услуги и образовательные программы находятся на этапе планирования.",
     ctaLabel: "Открыть направления",
     ctaHref: "#directions",
+    companyStatus: 'ТОО «SYSCORE»',
+    registrationStatus: "REGISTERED / KAZAKHSTAN",
+    interfaceMetadata: [
+      "COMPANY / REGISTERED",
+      "FIELD / CYBERSECURITY",
+      "LOCATION / ALMATY",
+    ],
   },
 
   positioning: {
@@ -152,6 +173,14 @@ export const siteContent = {
     ],
   },
 
+  companyProfile: {
+    title: "COMPANY / IDENTITY",
+    subtitle: "SYSTEM SECURITY CORE",
+    label: "SYSCORE",
+    location: "KAZAKHSTAN / ALMATY",
+    field: "CYBERSECURITY",
+  },
+
   education: {
     id: "education",
     title: "Образование",
@@ -187,8 +216,9 @@ export const siteContent = {
     id: "contacts",
     title: "Контакты",
     status: "Проект готовится к запуску",
+    headline: "SECURITY STARTS AT THE CORE.",
     description:
-      "Контакты появятся здесь после открытия центра. На этом этапе нет телефона, электронной почты, адреса, БИН и формы реальной отправки данных.",
+      "Свяжитесь с ТОО «SYSCORE» по подтверждённому телефону. Email и приём обращений через форму пока не публикуются.",
     formNotice:
       "Форма обратной связи будет активна после запуска. Сейчас поля недоступны, данные никуда не отправляются.",
     form: {
@@ -294,7 +324,7 @@ export const siteContent = {
       "Все сервисные направления на сайте — планируемые услуги. Они не являются офертой и не подтверждают, что центр уже оказывает эти услуги.",
     launchStatus: "Проект готовится к запуску.",
     noContacts:
-      "Реальные телефон, email, адрес и БИН не публикуются, пока их не предоставит заказчик.",
+      "Подтверждённые регистрационные данные и телефон ТОО «SYSCORE» опубликованы в блоке контактов. Email не добавляется до подтверждения рабочего адреса.",
     noPartnershipClaims:
       "Нельзя называть организации партнёрами или официальными партнёрами без подтверждённого соглашения.",
     noSocialProof:

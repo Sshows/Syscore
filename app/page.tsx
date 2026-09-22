@@ -1,5 +1,6 @@
 import { About } from "@/components/sections/About";
 import { Contacts } from "@/components/sections/Contacts";
+import { CompanyProfile } from "@/components/sections/CompanyProfile";
 import { Directions } from "@/components/sections/Directions";
 import { Education } from "@/components/sections/Education";
 import { Hero } from "@/components/sections/Hero";
@@ -12,6 +13,7 @@ export default function Home() {
       <Positioning />
       <Directions />
       <About />
+      <CompanyProfile />
       <Education />
       <Contacts />
     </>
