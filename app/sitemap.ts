@@ -1,12 +1,19 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/config/site";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = siteConfig.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   return [
     { url: siteUrl, lastModified, changeFrequency: "weekly", priority: 1 },
+    ...["services", "company", "education", "contact"].map((path) => ({
+      url: `${siteUrl}/${path}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     {
       url: `${siteUrl}/privacy`,
       lastModified,

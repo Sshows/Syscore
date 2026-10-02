@@ -1,0 +1,62 @@
+import assert from "node:assert/strict";
+const base = process.env.TEST_BASE_URL || "http://localhost:3000";
+const origin = process.env.TEST_ORIGIN || "https://syscore-blond.vercel.app";
+for (const path of [
+  "/",
+  "/services",
+  "/company",
+  "/education",
+  "/contact",
+  "/privacy",
+  "/personal-data",
+  "/sitemap.xml",
+  "/robots.txt",
+]) {
+  const response = await fetch(`${base}${path}`);
+  assert.equal(response.status, 200, path);
+  const body = await response.text();
+  assert.ok(body.length > 50, path);
+  if (path === "/company") {
+    assert.ok(body.includes("260940014470"));
+    assert.ok(body.includes("PhD"));
+  }
+  if (path === "/contact") {
+    assert.ok(body.includes("tel:+77027776181"));
+    assert.ok(!body.includes("mailto:"));
+  }
+  console.log(`PASS GET ${path}`);
+}
+assert.equal((await fetch(`${base}/api/health`)).status, 200);
+assert.equal((await fetch(`${base}/not-a-real-page`)).status, 404);
+assert.equal(
+  (await fetch(`${base}/api/security-check`, { method: "POST" })).status,
+  503,
+);
+const payload = {
+  name: "Smoke Test",
+  phone: "+77000000000",
+  topic: "security",
+  message: "Local verification only",
+  consent: true,
+  website: "",
+};
+const post = (data, customOrigin = origin, contentType = "application/json") =>
+  fetch(`${base}/api/leads`, {
+    method: "POST",
+    headers: { Origin: customOrigin, "Content-Type": contentType },
+    body: JSON.stringify(data),
+  });
+assert.equal((await post({})).status, 400);
+assert.equal((await post(payload, "https://untrusted.example")).status, 403);
+assert.equal((await post(payload, origin, "text/plain")).status, 415);
+assert.equal(
+  (await post({ ...payload, message: "x".repeat(9000) })).status,
+  413,
+);
+assert.equal((await post({ ...payload, consent: false })).status, 400);
+// Only run the delivery-off assertion with an explicitly unconfigured test server.
+if (process.env.TEST_DELIVERY_DISABLED === "true")
+  assert.equal((await post(payload)).status, 503);
+console.log(
+  "PASS API validation, origin, body limit and scanner fail-closed checks",
+);

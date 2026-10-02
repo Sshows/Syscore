@@ -3,12 +3,11 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { siteContent } from "@/content/site-content";
 import "./globals.css";
-
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.url),
+  alternates: { canonical: "/" },
   title: {
     default: siteContent.seo.title,
     template: `%s — ${siteContent.brand.name}`,
@@ -37,7 +36,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="ru">
       <body className="bg-background text-graphite min-h-screen font-sans antialiased">
         <Header />
-        <main>{children}</main>
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

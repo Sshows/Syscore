@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { siteContent } from "@/content/site-content";
+import { experience } from "@/content/site-content";
 
-const page = siteContent.legalPages.personalData;
+const page = experience.dataPolicy;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/personal-data" },
   title: page.title,
   description: page.updated,
 };
@@ -12,7 +13,7 @@ export default function PersonalDataPage() {
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
       <p className="text-mint text-sm font-semibold tracking-[0.14em] uppercase">
-        Черновик
+        SYSCORE / DATA
       </p>
       <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
         {page.title}

@@ -1,3 +1,252 @@
+export const experience = {
+  dataPolicy: {
+    title: "Данные и обратная связь",
+    updated:
+      "Онлайн-приём отключён до подключения доставки и утверждения условий обработки.",
+    sections: [
+      {
+        title: "Контакты компании",
+        body: "ТОО «SYSCORE», БИН 260940014470. 050000, г. Алматы, Бостандыкский район, пр. Абая, д. 52В, офис 724. Телефон: +7 702 777 61 81.",
+      },
+      {
+        title: "Онлайн-обращения",
+        body: "При включении формы передаются имя, телефон, тема, краткое описание и согласие для обратной связи. Файлы, пароли и материалы расследований не принимаются. До включения должны быть утверждены условия обработки, место и сроки хранения.",
+      },
+      {
+        title: "Доставка и сервисы",
+        body: "Серверный модуль предусматривает доставку обращения в Telegram компании. Для защиты от спама используется Redis с временным хешем сетевого адреса. Подключение этих сервисов требует согласования оператором. Аналитика, маркетинговые рассылки и регистрация аккаунтов не подключены.",
+      },
+      {
+        title: "Другие каналы связи",
+        body: "Звонок и переход в WhatsApp доступны без онлайн-формы. В WhatsApp действуют условия соответствующего сервиса. Вопросы об обработке данных можно направить компании по указанному телефону.",
+      },
+    ],
+  },
+  navigation: [
+    { href: "/services", label: "Направления" },
+    { href: "/education", label: "Обучение" },
+    { href: "/company", label: "Компания" },
+    { href: "/contact", label: "Контакты" },
+  ],
+  hero: {
+    label: "CYBERSECURITY / ALMATY",
+    title: "Безопасность начинается с ядра.",
+    description:
+      "Кибербезопасность, цифровые расследования и подготовка специалистов. Выберите вашу задачу.",
+    action: "Обсудить задачу",
+    secondary: "Выбрать направление",
+    notice: "Компания зарегистрирована. Услуги и программы планируются.",
+  },
+  directions: [
+    {
+      id: "incident",
+      number: "01",
+      title: "Киберинцидент",
+      tag: "INCIDENT / RESPONSE",
+      description: "Взлом, утечка или подозрительная активность.",
+      scope:
+        "Планируемое направление: анализ обстоятельств инцидента и рекомендации по защите.",
+      points: [
+        "Разбор исходных обстоятельств",
+        "Определение границ задачи",
+        "Согласование следующего шага",
+      ],
+    },
+    {
+      id: "forensics",
+      number: "02",
+      title: "Цифровое расследование",
+      tag: "DIGITAL / FORENSICS",
+      description: "Задачи, связанные с цифровыми следами.",
+      scope:
+        "Планируемое направление: исследование цифровых материалов в согласованных правовых границах.",
+      points: [
+        "Для организаций и специалистов",
+        "Работа только с законным доступом",
+        "Формат исследования согласуется отдельно",
+      ],
+    },
+    {
+      id: "security",
+      number: "03",
+      title: "Защита организации",
+      tag: "BUSINESS / SECURITY",
+      description: "Риски инфраструктуры, процессов и доступа.",
+      scope:
+        "Планируемое направление: оценка рисков и построение архитектуры защиты.",
+      points: [
+        "Определение критичных систем",
+        "Приоритеты защиты",
+        "План улучшений",
+      ],
+    },
+    {
+      id: "education",
+      number: "04",
+      title: "Обучение",
+      tag: "PEOPLE / SKILLS",
+      description: "Практические навыки цифровой безопасности.",
+      scope:
+        "Образовательные программы планируются. Набор, сроки и стоимость пока не объявлены.",
+      points: [
+        "Основы кибербезопасности",
+        "Безопасная работа с данными",
+        "Практические учебные сценарии",
+      ],
+    },
+  ],
+  home: {
+    taskLabel: "SELECT YOUR MISSION",
+    taskTitle: "С чего начнём?",
+    companyLabel: "THE HUMAN BEHIND THE CORE",
+    companyTitle: "Экспертиза начинается с человека.",
+    companyText:
+      "Аскар Сысоев — основатель SYSCORE, доктор философии (PhD) по правоохранительной деятельности.",
+    companyAction: "Основатель и документы",
+    educationTitle: "Знания — часть защиты.",
+    educationText: "Будущие программы для специалистов и команд.",
+    educationAction: "Образовательное направление",
+    contactTitle: "Есть задача? Обсудим.",
+    contactText:
+      "Без файлов, паролей и конфиденциальных материалов на первом этапе.",
+  },
+  services: {
+    label: "CAPABILITIES",
+    title: "Выберите вашу задачу.",
+    description:
+      "Направления в разработке. Доступность и объём работ подтверждаем лично.",
+    cta: "Обсудить это направление",
+    disclaimer:
+      "SYSCORE не является экстренной службой. Официальное сотрудничество с МВД и действующий SOC не заявляются.",
+  },
+  company: {
+    label: "COMPANY / IDENTITY",
+    title: "SYSCORE. Казахстан.",
+    founderLabel: "FOUNDER / PROFILE",
+    founderTitle: "Аскар Сысоев",
+    degree: "Доктор философии (PhD)",
+    degreeDetail: "6D030300 — Правоохранительная деятельность · 27.04.2021",
+    credentialsTitle: "Образование и подготовка",
+    credentialsNotice:
+      "Личные документы основателя, предоставленные владельцем сайта. Курсы не являются сертификацией компании; сканы с подписями и номерами не публикуются.",
+    legalTitle: "Регистрационные данные",
+    legalLabels: [
+      "БИН",
+      "ОКЭД",
+      "Регистрация",
+      "Руководитель",
+      "Юридический адрес",
+    ],
+  },
+  credentials: [
+    {
+      title: "The Complete Ethical Hacking Course",
+      issuer: "Coursera · специализация, 4 курса",
+      date: "04.05.2026",
+      group: "security",
+      href: "https://coursera.org/verify/specialization/RQI7K5JTAMZK",
+    },
+    {
+      title: "Расследование преступлений в сфере высоких технологий",
+      issuer: "Воронежский институт МВД России · 72 часа",
+      date: "04.10.2012",
+      group: "security",
+      href: "",
+    },
+    {
+      title: "Advanced Level Communication Technologies and Applications",
+      issuer: "TİKA / Turkish National Police · курс",
+      date: "25.11.2011",
+      group: "security",
+      href: "",
+    },
+    {
+      title: "Современные проблемы теории и практики ОРД",
+      issuer: "Global Professional Development · 72 часа",
+      date: "28.01.2022",
+      group: "security",
+      href: "",
+    },
+    {
+      title: "Искусственный Интеллект (ИИ) для всех",
+      issuer: "DeepLearning.AI / Coursera",
+      date: "15.04.2026",
+      group: "education",
+      href: "https://coursera.org/verify/E1XTM7FYB0JS",
+    },
+    {
+      title: "Цифровая трансформация в образовании",
+      issuer: "КазНУ имени аль-Фараби · 72 часа",
+      date: "28.11.2021",
+      group: "education",
+      href: "",
+    },
+    {
+      title: "Blended Learning: Personalizing Education for Students",
+      issuer: "Coursera · курс",
+      date: "04.05.2026",
+      group: "education",
+      href: "https://coursera.org/verify/R4720WNP6T2B",
+    },
+    {
+      title: "Disability Inclusion in Education: Building Systems of Support",
+      issuer: "University of Cape Town / Coursera",
+      date: "17.04.2026",
+      group: "education",
+      href: "https://coursera.org/verify/9G8V4UDLJ9DN",
+    },
+    {
+      title: "Diversity and inclusion in the workplace",
+      issuer: "ESSEC Business School / Coursera",
+      date: "16.04.2026",
+      group: "education",
+      href: "https://coursera.org/verify/2YZAHWIOJM00",
+    },
+    {
+      title: "Managing Diversity in a Multicultural Workplace",
+      issuer: "Starweaver / Coursera",
+      date: "18.04.2026",
+      group: "education",
+      href: "https://coursera.org/verify/NE83O1V8KO3A",
+    },
+  ],
+  education: {
+    label: "EDUCATION / PLANNED",
+    title: "Учиться защищать.",
+    description:
+      "Готовим образовательное направление. Можно обсудить потребности вашей команды.",
+    topics: [
+      "Кибербезопасность",
+      "Цифровые расследования",
+      "Безопасность данных",
+    ],
+    notice:
+      "Набор не открыт. Даты, учебные планы и условия будут опубликованы после утверждения.",
+    cta: "Обсудить обучение",
+  },
+  contact: {
+    label: "CONTACT / SYSCORE",
+    title: "Начнём с вашей задачи.",
+    intro: "Выберите тему и оставьте контакт для обратной связи.",
+    name: "Ваше имя",
+    phone: "Телефон",
+    topic: "Тема обращения",
+    message: "Кратко о задаче",
+    warning:
+      "Не отправляйте пароли, доказательства, персональные данные третьих лиц или секретные материалы.",
+    consent: "Согласен на обработку данных для ответа на обращение",
+    submit: "Отправить обращение",
+    sending: "Отправляем…",
+    success: "Обращение доставлено. Для срочного контакта позвоните нам.",
+    error: "Не удалось отправить. Позвоните или напишите в WhatsApp.",
+    unavailable:
+      "Онлайн-приём ещё не подключён. Свяжитесь с SYSCORE по телефону или в WhatsApp.",
+    invalid: "Проверьте имя, телефон и согласие на обработку данных.",
+    whatsapp: "Написать в WhatsApp",
+    call: "Позвонить SYSCORE",
+  },
+} as const;
+
 export const siteContent = {
   brand: {
     name: "Syscore",
@@ -6,7 +255,7 @@ export const siteContent = {
   },
 
   company: {
-    legalName: 'ТОО «SYSCORE»',
+    legalName: "ТОО «SYSCORE»",
     bin: "260940014470",
     registrationDate: "11.09.2026",
     oked: "62092",
@@ -23,8 +272,8 @@ export const siteContent = {
   seo: {
     title: "Syscore — System Security Core",
     description:
-      "Syscore — центр кибербезопасности в Казахстане. Проект готовится к запуску. На сайте представлены планируемые направления защиты бизнеса и подготовки специалистов.",
-    ogAlt: "Syscore — System Security Core, проект готовится к запуску",
+      "ТОО SYSCORE, Алматы. Планируемые направления кибербезопасности, цифровых расследований и обучения. Компания, квалификация основателя и контакты.",
+    ogAlt: "SYSCORE — кибербезопасность, Алматы, Казахстан",
   },
 
   nav: [
@@ -43,7 +292,7 @@ export const siteContent = {
       "Центр кибербезопасности в Казахстане. Мы готовим инфраструктуру для двух задач: защита бизнеса и подготовка специалистов. Услуги и образовательные программы находятся на этапе планирования.",
     ctaLabel: "Explore security",
     ctaHref: "#directions",
-    companyStatus: 'ТОО «SYSCORE»',
+    companyStatus: "ТОО «SYSCORE»",
     registrationStatus: "REGISTERED / KAZAKHSTAN",
     interfaceMetadata: [
       "COMPANY / REGISTERED",
@@ -105,9 +354,67 @@ export const siteContent = {
   },
 
   imageSlots: [
-    { id: "hero", label: "REAL VISUAL / HERO", note: "Space reserved for a verified Syscore photo" },
-    { id: "education", label: "REAL VISUAL / EDUCATION", note: "Space reserved for a verified lab or learning photo" },
+    {
+      id: "hero",
+      label: "REAL VISUAL / HERO",
+      note: "Space reserved for a verified Syscore photo",
+    },
+    {
+      id: "education",
+      label: "REAL VISUAL / EDUCATION",
+      note: "Space reserved for a verified lab or learning photo",
+    },
   ],
+
+  core01: {
+    title: "CORE-01",
+    subtitle: "SYSCORE SECURITY INTELLIGENCE",
+    notice: "CONCEPTUAL GUARDIAN VISUAL",
+  },
+
+  securityCheck: {
+    title: "CHECK YOUR SECURITY",
+    disclaimer:
+      "Security Check performs passive configuration analysis and is not a penetration test.",
+    placeholder: "example.com",
+    action: "RUN PASSIVE CHECK",
+  },
+
+  cyberLab: {
+    title: "CYBER LAB",
+    notice: "DEMO / EDUCATIONAL SCENARIO",
+    tabs: ["SOC LAB", "THREAT LAB", "DEFENSE LAB"],
+    alert: "ALERT #00421",
+    message: "Suspicious login detected.",
+  },
+
+  socRoom: {
+    title: "SYSCORE SECURITY OPERATIONS",
+    notice: "DEMO / CONCEPT INTERFACE",
+  },
+  academy: {
+    title: "SYSCORE ACADEMY",
+    path: [
+      "FOUNDATION",
+      "SOC",
+      "THREAT INTELLIGENCE",
+      "INCIDENT RESPONSE",
+      "PRACTICE",
+    ],
+  },
+  story: {
+    title: "COMPANY STORY",
+    fields: ["MISSION", "VISION", "WHAT WE BUILD", "WHO WE BUILD IT FOR"],
+    notice: "FORMULATIONS ARE PREPARING FOR CONFIRMATION",
+  },
+  people: {
+    title: "PEOPLE BEHIND THE CORE",
+    note: "Space reserved for verified team profiles and photographs.",
+  },
+  place: {
+    title: "SYSCORE / ALMATY",
+    labels: ["050000", "ALMATY / KZ", "ABAY AVE 52B"],
+  },
 
   positioning: {
     id: "positioning",
@@ -368,7 +675,7 @@ export const siteContent = {
   },
 
   footer: {
-    copyright: "Syscore. Проект готовится к запуску.",
+    copyright: "ТОО «SYSCORE» · BIN 260940014470 · Almaty, Kazakhstan",
     legalLinks: [
       { href: "/privacy", label: "Политика конфиденциальности" },
       {

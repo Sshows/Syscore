@@ -15,8 +15,8 @@ export default function OpenGraphImage() {
         flexDirection: "column",
         justifyContent: "center",
         padding: 80,
-        background: "#FFFFFF",
-        color: "#1E2328",
+        background: "#0b1013",
+        color: "#eef6f3",
       }}
     >
       <div
@@ -29,7 +29,7 @@ export default function OpenGraphImage() {
           marginBottom: 24,
         }}
       >
-        Проект готовится к запуску
+        {siteContent.company.location}
       </div>
       <div
         style={{
@@ -56,7 +56,7 @@ export default function OpenGraphImage() {
           display: "flex",
           fontSize: 24,
           marginTop: 28,
-          color: "#5B6168",
+          color: "#a1b3aa",
           maxWidth: 820,
         }}
       >
