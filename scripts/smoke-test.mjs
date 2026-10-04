@@ -4,6 +4,8 @@ const origin = process.env.TEST_ORIGIN || "https://syscore-blond.vercel.app";
 for (const path of [
   "/",
   "/services",
+  "/audiences",
+  "/founder",
   "/company",
   "/education",
   "/contact",
@@ -18,7 +20,7 @@ for (const path of [
   assert.ok(body.length > 50, path);
   if (path === "/company") {
     assert.ok(body.includes("260940014470"));
-    assert.ok(body.includes("PhD"));
+    assert.ok(body.includes("62092"));
   }
   if (path === "/contact") {
     assert.ok(body.includes("tel:+77027776181"));
@@ -27,6 +29,38 @@ for (const path of [
   console.log(`PASS GET ${path}`);
 }
 assert.equal((await fetch(`${base}/api/health`)).status, 200);
+const first = await fetch(base);
+const second = await fetch(base);
+const csp = first.headers.get("content-security-policy");
+assert.ok(csp.includes("'nonce-") && csp.includes("'strict-dynamic'"));
+assert.ok(!csp.split("style-src")[0].includes("'unsafe-inline'"));
+assert.notEqual(csp, second.headers.get("content-security-policy"));
+assert.equal(first.headers.get("x-content-type-options"), "nosniff");
+assert.equal(first.headers.get("x-frame-options"), "DENY");
+assert.ok(
+  (await fetch(base + "/opengraph-image")).headers
+    .get("content-type")
+    .startsWith("image/png"),
+);
+for (const id of [
+  "phd",
+  "ethical-hacking",
+  "investigation",
+  "communication",
+  "ord",
+  "ai",
+  "digital-learning",
+  "blended-learning",
+  "disability-inclusion",
+  "diversity",
+  "managing-diversity",
+]) {
+  const response = await fetch(base + "/certificates/" + id + ".pdf");
+  assert.equal(response.status, 200);
+  assert.ok(response.headers.get("content-type").startsWith("application/pdf"));
+  const preview = await fetch(base + "/certificates/" + id + ".webp");
+  assert.equal(preview.status, 200);
+}
 assert.equal((await fetch(`${base}/not-a-real-page`)).status, 404);
 assert.equal(
   (await fetch(`${base}/api/security-check`, { method: "POST" })).status,
@@ -39,6 +73,7 @@ const payload = {
   message: "Local verification only",
   consent: true,
   website: "",
+  captchaToken: "synthetic-local-test-only",
 };
 const post = (data, customOrigin = origin, contentType = "application/json") =>
   fetch(`${base}/api/leads`, {
@@ -54,6 +89,13 @@ assert.equal(
   413,
 );
 assert.equal((await post({ ...payload, consent: false })).status, 400);
+assert.equal(
+  (await post({ ...payload, password: "not-accepted" })).status,
+  400,
+);
+assert.equal((await post({ ...payload, files: [] })).status, 400);
+assert.equal((await post({ ...payload, captchaToken: "" })).status, 400);
+assert.equal((await post({ ...payload, website: "spam.example" })).status, 200);
 // Only run the delivery-off assertion with an explicitly unconfigured test server.
 if (process.env.TEST_DELIVERY_DISABLED === "true")
   assert.equal((await post(payload)).status, 503);

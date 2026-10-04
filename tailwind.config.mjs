@@ -8,9 +8,10 @@ const config = {
   theme: {
     extend: {
       colors: {
-        background: "#FFFFFF",
-        graphite: "#1E2328",
-        mint: "#3ED6A8",
+        background: "#0A1020",
+        graphite: "#EAF2FF",
+        mint: "#FFB224", // Legacy token maps to amber; no green rendered.
+        amber: "#FFB224",
       },
       fontFamily: {
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],

@@ -1,97 +1,68 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { PageIntro } from "@/components/ui/PageIntro";
-import { experience as copy, siteContent } from "@/content/site-content";
+import { redesign as copy, siteContent } from "@/content/site-content";
 export const metadata: Metadata = {
-  title: "Компания и основатель",
+  title: "Компания",
+  description: copy.company.description,
   alternates: { canonical: "/company" },
 };
 export default function Company() {
-  const legal = [
-    siteContent.company.bin,
-    `${siteContent.company.oked} · ${siteContent.company.activity}`,
-    siteContent.company.registrationDate,
-    siteContent.company.director,
-    siteContent.company.address,
+  const c = siteContent.company;
+  const values = [
+    c.bin,
+    `${c.oked} · ${c.activity}`,
+    c.registrationDate,
+    c.director,
+    c.address,
   ];
   return (
-    <div className="site-shell inner-page">
-      <PageIntro {...copy.company} />
-      <section className="company-identity tech-grid">
+    <div className="shell page-wrap">
+      <PageIntro
+        label={copy.common.company}
+        title={copy.company.title}
+        description={copy.company.description}
+      />
+      <section className="identity-panel">
         <div>
-          <p className="system-label">SYSTEM SECURITY CORE</p>
+          <Image
+            className="company-mark"
+            src="/brand/syscore-mark.svg"
+            width={80}
+            height={80}
+            alt=""
+            unoptimized
+          />
           <h2>SYSCORE</h2>
-          <p>{siteContent.company.location}</p>
+          <p>{c.legalName}</p>
+          <p className="text-muted">{c.location}</p>
+          <Link className="text-link" href="/founder">
+            {copy.founder.cta}
+          </Link>
         </div>
-        <div className="identity-circuit" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="identity-data">
-          <span>
-            BIN<strong>{siteContent.company.bin}</strong>
-          </span>
-          <span>
-            OKED<strong>{siteContent.company.oked}</strong>
-          </span>
-          <span>
-            REGISTERED<strong>{siteContent.company.registrationDate}</strong>
-          </span>
-        </div>
-      </section>
-      <section className="founder-strip">
-        <div>
-          <p className="system-label">{copy.company.founderLabel}</p>
-          <h2>{copy.company.founderTitle}</h2>
-          <p>{siteContent.company.director}</p>
-          <p>{copy.company.degreeDetail}</p>
-        </div>
-        <div className="degree-mark">
-          <span>PhD</span>
-          <small>{copy.company.degree}</small>
-        </div>
-      </section>
-      <section className="credentials-section">
-        <h2>{copy.company.credentialsTitle}</h2>
-        <p className="micro-note">{copy.company.credentialsNotice}</p>
-        <div className="credentials-grid">
-          {copy.credentials.map((item) => (
-            <article className="credential-card" key={item.title}>
-              <p className="system-label">
-                {item.group === "security" ? "SECURITY" : "EDUCATION"} /{" "}
-                {item.date}
-              </p>
-              <h3>{item.title}</h3>
-              <p>{item.issuer}</p>
-              {item.href ? (
-                <a
-                  className="action-text"
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Проверить сертификат ↗
-                </a>
-              ) : (
-                <span className="micro-note">
-                  Документ предоставлен основателем
-                </span>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="legal-section">
-        <h2>{copy.company.legalTitle}</h2>
-        <p>{siteContent.company.legalName}</p>
         <dl>
-          {legal.map((value, index) => (
+          {values.map((value, index) => (
             <div key={value}>
-              <dt>{copy.company.legalLabels[index]}</dt>
+              <dt>{copy.company.labels[index]}</dt>
               <dd>{value}</dd>
             </div>
           ))}
         </dl>
+      </section>
+      <p className="fine-print" style={{ marginTop: 24 }}>
+        {copy.company.notice}
+      </p>
+      <section className="contact-banner">
+        <div>
+          <h2>{copy.contact.title}</h2>
+          <a className="contact-number" href={c.phoneHref}>
+            {c.phone}
+          </a>
+        </div>
+        <Link href="/contact" className="button">
+          {copy.contact.cta}
+        </Link>
       </section>
     </div>
   );

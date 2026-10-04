@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
-    <div className="site-shell inner-page" role="status" aria-live="polite">
-      <p className="system-label">SYSCORE / Загрузка…</p>
+    <div className="shell page-state" role="status" aria-live="polite">
+      <p className="eyebrow">SYSCORE · Загрузка…</p>
     </div>
   );
 }

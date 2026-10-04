@@ -1,24 +1,35 @@
 "use client";
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
-import { experience as copy } from "@/content/site-content";
+import { useCallback, useState, type FormEvent } from "react";
+import {
+  experience as copy,
+  redesign,
+  siteContent,
+} from "@/content/site-content";
 import { leadSchema } from "@/lib/leads/schema";
-
+import { Turnstile } from "@/components/Turnstile";
 export function ContactForm({
   enabled,
   topic,
+  siteKey,
+  nonce,
 }: {
   enabled: boolean;
   topic: string;
+  siteKey: string;
+  nonce?: string;
 }) {
-  const [busy, setBusy] = useState(false);
-  const [feedback, setFeedback] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [busy, setBusy] = useState(false),
+    [feedback, setFeedback] = useState(""),
+    [success, setSuccess] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState(""),
+    [resetKey, setResetKey] = useState(0);
+  const onToken = useCallback((token: string) => setCaptchaToken(token), []);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busy || !enabled) return;
-    const form = event.currentTarget;
-    const data = new FormData(form);
+    const form = event.currentTarget,
+      data = new FormData(form);
     const parsed = leadSchema.safeParse({
       name: data.get("name"),
       phone: data.get("phone"),
@@ -26,6 +37,7 @@ export function ContactForm({
       message: data.get("message"),
       website: data.get("website"),
       consent: data.get("consent") === "on",
+      captchaToken,
     });
     if (!parsed.success) {
       setFeedback(copy.contact.invalid);
@@ -40,7 +52,7 @@ export function ContactForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(parsed.data),
-        signal: AbortSignal.timeout(20000),
+        signal: AbortSignal.timeout(25000),
       });
       const result = (await response.json()) as { message?: string };
       setFeedback(result.message || copy.contact.error);
@@ -50,19 +62,36 @@ export function ContactForm({
       setFeedback(copy.contact.error);
     } finally {
       setBusy(false);
+      setCaptchaToken("");
+      setResetKey((value) => value + 1);
     }
   }
+  if (!enabled)
+    return (
+      <div className="lead-form">
+        <p className="eyebrow">{redesign.common.contact}</p>
+        <h2>{redesign.contact.cta}</h2>
+        <p className="form-notice">{copy.contact.unavailable}</p>
+        <p className="fine-print">{redesign.contact.safety}</p>
+        <a className="button" href={siteContent.company.phoneHref}>
+          {redesign.contact.call}
+        </a>
+      </div>
+    );
   return (
     <form
       className="lead-form"
       onSubmit={submit}
       aria-label="Обращение в SYSCORE"
+      aria-busy={busy}
     >
-      {!enabled && <p className="form-notice">{copy.contact.unavailable}</p>}
       <label>
         {copy.contact.topic}
         <select name="topic" defaultValue={topic}>
-          {copy.directions.map((item) => (
+          {[
+            ...redesign.services.items,
+            { id: "education", title: redesign.common.education },
+          ].map((item) => (
             <option key={item.id} value={item.id}>
               {item.title}
             </option>
@@ -104,7 +133,7 @@ export function ContactForm({
           <input name="website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
-      <p className="micro-note" id="privacy-warning">
+      <p className="fine-print" id="privacy-warning">
         {copy.contact.warning}
       </p>
       <label className="consent">
@@ -113,12 +142,14 @@ export function ContactForm({
           {copy.contact.consent}. <Link href="/personal-data">Условия</Link>
         </span>
       </label>
-      <button
-        className="action-primary"
-        disabled={busy || !enabled}
-        type="submit"
-      >
-        {busy ? copy.contact.sending : copy.contact.submit} ↗
+      <Turnstile
+        siteKey={siteKey}
+        nonce={nonce}
+        onToken={onToken}
+        resetKey={resetKey}
+      />
+      <button className="button" type="submit" disabled={busy || !captchaToken}>
+        {busy ? copy.contact.sending : copy.contact.submit}
       </button>
       <p
         role="status"

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { ContactForm } from "@/components/ContactForm";
-import { experience as copy, siteContent } from "@/content/site-content";
-import { leadDeliveryConfigured } from "@/lib/leads/delivery";
-export const dynamic = "force-dynamic";
+import { redesign as copy, siteContent } from "@/content/site-content";
+import { leadDeliveryConfigured } from "@/lib/leads/config";
+import { leadTopics } from "@/lib/leads/schema";
 export const metadata: Metadata = {
-  title: "Связаться с SYSCORE",
+  title: "Контакты",
+  description: copy.contact.description,
   alternates: { canonical: "/contact" },
 };
 export default async function Contact({
@@ -14,45 +16,59 @@ export default async function Contact({
   searchParams: Promise<{ topic?: string }>;
 }) {
   const params = await searchParams;
-  const topic = copy.directions.some((item) => item.id === params.topic)
-    ? params.topic!
-    : "incident";
+  const topic =
+    leadTopics.find((value) => value === params.topic) || "incident";
+  const nonce = (await headers()).get("x-nonce") || undefined,
+    c = siteContent.company;
   return (
-    <div className="site-shell inner-page">
+    <div className="shell page-wrap">
       <PageIntro
-        label={copy.contact.label}
+        label={copy.common.contact}
         title={copy.contact.title}
-        description={copy.contact.intro}
+        description={copy.contact.description}
       />
       <div className="contact-layout">
         <div className="contact-details">
-          <p className="system-label">
-            {siteContent.company.legalName} / ALMATY
-          </p>
-          <a className="contact-number" href={siteContent.company.phoneHref}>
-            {siteContent.company.phone}
+          <p className="eyebrow">{c.legalName}</p>
+          <a className="contact-number" href={c.phoneHref}>
+            {c.phone}
           </a>
           <a
-            className="action-text"
-            href={siteContent.company.whatsappHref}
+            className="text-link"
+            href={c.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {copy.contact.whatsapp} ↗
+            {copy.contact.whatsapp}
           </a>
-          <address>{siteContent.company.address}</address>
-          <p className="micro-note">
-            BIN / {siteContent.company.bin}
-            <br />
-            OKED / {siteContent.company.oked}
-            <br />
-            REGISTERED / {siteContent.company.registrationDate}
-          </p>
+          <address>{c.address}</address>
+          <dl className="contact-legal">
+            <div>
+              <dt>БИН</dt>
+              <dd>{c.bin}</dd>
+            </div>
+            <div>
+              <dt>ОКЭД</dt>
+              <dd>
+                {c.oked} · {c.activity}
+              </dd>
+            </div>
+            <div>
+              <dt>{copy.company.labels[2]}</dt>
+              <dd>{c.registrationDate}</dd>
+            </div>
+            <div>
+              <dt>{copy.company.labels[3]}</dt>
+              <dd>{c.director}</dd>
+            </div>
+          </dl>
         </div>
         <ContactForm
           key={topic}
           enabled={leadDeliveryConfigured()}
           topic={topic}
+          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() || ""}
+          nonce={nonce}
         />
       </div>
     </div>
