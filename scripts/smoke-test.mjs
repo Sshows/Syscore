@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 const base = process.env.TEST_BASE_URL || "http://localhost:3000";
 const origin = process.env.TEST_ORIGIN || "https://syscore-blond.vercel.app";
+const responses = [];
+const fetch = async (input, options) => {
+  const response = await globalThis.fetch(input, options);
+  responses.push(response);
+  return response;
+};
 for (const path of [
   "/",
   "/services",
@@ -78,11 +84,28 @@ for (const id of [
 for (const encoded of [
   "%2Fcertificates%2Fphd.webp",
   "%252Fcertificates%252Fphd.webp",
-])
-  assert.equal(
-    (await fetch(base + "/_next/image?url=" + encoded + "&w=640&q=75")).status,
-    410,
-  );
+]) {
+  for (const width of [640, 3840]) {
+    for (const quality of [75, 85]) {
+      const response = await fetch(
+        `${base}/_next/image?url=${encoded}&w=${width}&q=${quality}`,
+      );
+      assert.ok(response.headers.get("content-type")?.startsWith("text/plain"));
+      if (response.status === 410) {
+        assert.ok(response.headers.get("cache-control")?.includes("no-store"));
+        assert.ok(response.headers.get("x-robots-tag")?.includes("noindex"));
+      } else {
+        // Vercel's managed optimizer rejects the retired source before Next proxy.
+        // Accept only its explicit protective error, not an arbitrary 4xx/5xx.
+        assert.equal(response.status, 400);
+        assert.equal(
+          response.headers.get("x-vercel-error"),
+          "INVALID_IMAGE_OPTIMIZE_REQUEST",
+        );
+      }
+    }
+  }
+}
 assert.equal(
   (await fetch(base + "/certificates/phd.pdf", { method: "HEAD" })).status,
   410,
@@ -132,6 +155,13 @@ assert.equal((await post({ ...payload, website: "spam.example" })).status, 200);
 // Only run the delivery-off assertion with an explicitly unconfigured test server.
 if (process.env.TEST_DELIVERY_DISABLED === "true")
   assert.equal((await post(payload)).status, 503);
+// Release unread error / HTML streams too, so a remote run doesn't keep TLS
+// connections alive after its assertions. Do not log or download their contents.
+await Promise.all(
+  responses
+    .filter((response) => response.body && !response.bodyUsed)
+    .map((response) => response.body.cancel()),
+);
 console.log(
   "PASS API validation, origin, body limit and scanner fail-closed checks",
 );
