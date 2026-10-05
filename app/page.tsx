@@ -1,8 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
 import { CoreScene } from "@/components/brand/CoreScene";
 import { EvidenceArt } from "@/components/brand/EvidenceArt";
-import { redesign as copy, siteContent } from "@/content/site-content";
+import {
+  redesign as copy,
+  siteContent,
+  cyberRange,
+} from "@/content/site-content";
 
 export default function Home() {
   return (
@@ -60,7 +63,6 @@ export default function Home() {
                 href={`/services#${item.id}`}
                 className="service-row"
                 key={item.id}
-                data-cursor="Открыть"
               >
                 <h3>{item.title}</h3>
                 <p>{item.short}</p>
@@ -83,19 +85,39 @@ export default function Home() {
         </div>
         <Link
           href="/founder#documents"
-          className="founder-paper"
-          aria-label={copy.founder.cta}
-          data-cursor="Документы"
+          className="founder-credential"
+          data-cursor="shield"
         >
-          <Image
-            src="/certificates/phd.webp"
-            alt="Диплом PhD Аскара Сысоева, 2021"
-            fill
-            sizes="(max-width: 800px) 85vw, 40vw"
-          />
+          <span className="credential-kicker">
+            {copy.interface.personalQualification}
+          </span>
+          <strong>PhD</strong>
+          <span>{copy.founder.degree}</span>
+          <span className="text-link">
+            {copy.interface.qualificationLink}
+            <span aria-hidden="true">↗</span>
+          </span>
         </Link>
       </section>
       <section className="section" aria-labelledby="audiences-title">
+        <Link href="/education" className="range-preview">
+          <div>
+            <span className="pill">{copy.common.planned}</span>
+            <h2>{cyberRange.previewTitle}</h2>
+            <p>{cyberRange.previewText}</p>
+            <span className="text-link">
+              {cyberRange.previewAction}
+              <span aria-hidden="true">↗</span>
+            </span>
+          </div>
+          <div className="range-preview-art" aria-hidden="true">
+            <span>LAB</span>
+            <i />
+            <span>NET</span>
+            <i />
+            <span>CORE</span>
+          </div>
+        </Link>
         <div className="section-header">
           <h2 id="audiences-title">{copy.audiences.title}</h2>
           <Link href="/audiences" className="text-link">

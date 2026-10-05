@@ -1,16 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
   useSpring,
   useReducedMotion,
+  useInView,
 } from "framer-motion";
 import Link from "next/link";
 import { redesign } from "@/content/site-content";
 const layers = redesign.coreLayers;
 export function CoreScene() {
   const [selected, setSelected] = useState(0);
+  const scene = useRef<HTMLDivElement>(null);
+  const visible = useInView(scene, { margin: "80px" });
   const reduced = useReducedMotion();
   const x = useMotionValue(0),
     y = useMotionValue(0);
@@ -19,6 +22,8 @@ export function CoreScene() {
   return (
     <div
       className="core-experience"
+      ref={scene}
+      data-scene-active={visible && !reduced ? "true" : "false"}
       onPointerMove={(event) => {
         if (reduced || event.pointerType !== "mouse") return;
         const b = event.currentTarget.getBoundingClientRect();
@@ -107,7 +112,9 @@ export function CoreScene() {
             cy={320 + Math.sin((layers[selected].angle * Math.PI) / 180) * 270}
             r="7"
             fill="#FFB224"
-            animate={reduced ? {} : { opacity: [0.5, 1, 0.5] }}
+            animate={
+              reduced || !visible ? { opacity: 1 } : { opacity: [0.5, 1, 0.5] }
+            }
             transition={{ duration: 3, repeat: Infinity }}
           />
         </svg>
@@ -126,9 +133,13 @@ export function CoreScene() {
             </button>
           ))}
         </div>
-        <Link data-cursor="Открыть" href={layers[selected].href}>
-          Подробнее о направлении <span aria-hidden="true">↗</span>
-        </Link>
+        <div className="core-context" aria-live="polite" aria-atomic="true">
+          <p>{layers[selected].summary}</p>
+          <span>{layers[selected].result}</span>
+          <Link href={layers[selected].href}>
+            {layers[selected].action} <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

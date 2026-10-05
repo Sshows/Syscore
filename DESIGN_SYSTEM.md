@@ -4,7 +4,7 @@
 
 ## Принцип
 
-Цифровые следы → контекст → человек → связь. Не имитация SOC dashboard. Декоративные точки и линии не являются реальными метриками. На главной пять разнородных композиций: hero, список направлений с evidence-art, основатель с настоящим дипломом, аудитории, контактный CTA.
+Цифровые следы → контекст → человек → связь. Не имитация SOC dashboard. Декоративные точки и линии не являются реальными метриками. На главной пять разнородных композиций: hero, направления с evidence-art, основатель с типографической PhD-плоскостью без скана, аудитории / переход к будущему полигону, контактный CTA.
 
 ## Токены
 
@@ -21,7 +21,7 @@
 | border       | #2B3B55                   | разделители                                |
 | ease         | cubic-bezier(.22,1,.36,1) | движение                                   |
 
-Старое Tailwind-имя mint оставлено только как alias к amber для неиспользуемых компонентов; зелёного акцента в новом интерфейсе нет. Цвета оригиналов сертификатов не изменяются.
+Старое Tailwind-имя mint оставлено только как alias к amber для неиспользуемых компонентов; зелёного акцента в новом интерфейсе нет. Оригиналы сертификатов и их изображения не публикуются.
 
 Проверенные контрастные пары: ice/ink 16.83:1, muted/surface-high 7.62:1, amber/ink 10.51:1. Steel с пониженной непрозрачностью — только декор. Не использовать как мелкий текст. Не заявлять полную WCAG-сертификацию на основании одного автоматического теста.
 
@@ -55,30 +55,34 @@ Unbounded Variable 200–900: геометрические заголовки, 5
 - Secondary button: прозрачная navy-плоскость с thin border; hover surface-high; focus тот же. Text link: underline, min-height44px.
 - Navigation: shared-layout indicator / spring 360, damping27; active маленький amber-сигнал; hover/focus один источник выделения; aria-current page. Fullscreen mobile: native dialog, focus trap, initial close-button focus, Esc и возврат фокуса.
 - Direction row: большая типографика, short subtitle, divider; hover локальный отступ / плоскость, знак плюс (не четырежды одинаковая карточка).
-- Founder panel: крупный угол, реальный документ на отдельной плоскости; без фейкового портрета. На странице initials-slot с явным TODO.
+- Founder panel: крупный угол, PhD как типографический факт с направлением / годом; без документа, его номера и фейкового портрета. На странице initials-slot с явным TODO.
 - Company identity: отдельный крупный блок с mark, названием и реквизитами; не маркетинговый рейтинг / налоговый статус.
 - Form: label всегда виден, input navy, border #405371, min-height48px. Error тёплый читаемый цвет + текст, не только цвет; success живой status. Пока конфигурация не полная — честная contact-плоскость, не набор disabled-полей.
-- Gallery: фильтры aria-pressed, preview aspect1.4, lazy / blur, caption issuer/year. Keyboard focus обводка. Original PDF открывается отдельно. Изображения первой страницы не заменяют многостраничный PDF.
-- Lightbox: native modal, contain-image, +/- zoom1–3x, pan после увеличения, rotate90°, reset, previous/next, ←/→, Esc, caption и original link. Удаление/отправка документов не предусмотрены.
+- Qualifications: фильтры aria-pressed, карточки с названием / issuer / year и публичными vendor verification links; без сканов, файлов и lightbox. Плашка объясняет адресное подтверждение по согласованию с основателем.
+- Cyber range: схема шести учебных узлов, информация по выбору, четыре шага сценария и три vendor-направления. Статус planned и явная маркировка объяснителя. На mobile — клавиатурно-доступная сетка узлов, не сжатая нечитаемая карта. Нет fake console / uptime / attack execution.
 - Section header: h2 + короткая supporting строка или одна ссылка, не повторяющийся шаблон большой карточки.
 - States: loading с role=status; error с retry; 404 с возвращением на главную.
 
 ## Движение
 
-Hero: title-word stagger .08s, ≤.8s; core enter1.4s; amber-breathe5s; trace12s. Pointer-spring70/22, только mouse. Интерактивные layers — обычные доступные кнопки, а не canvas-only hotspots. Переход между слоями меняет ссылку направления, не создаёт видимость работающего SOC.
+Hero: title-word stagger .08s, .55s, только transform без animated blur; core enter1.4s; amber-breathe5s только opacity; trace12s. Pointer-spring70/22, только mouse. Layers — доступные кнопки; меняются описание задачи, планируемый результат и CTA. Движение ядра приостанавливается вне viewport. Не создаётся видимость работающего SOC.
 
-Desktop smooth scroll — Lenis lerp .085, dynamic import только fine pointer и non-reduced. Cursor lerp .16, passive listeners / ref, без React setState на каждом кадре; магнит10% от pointer displacement. Native cursor остаётся. На смене маршрута bindings обновляются. Невидимый таб останавливает cursor-rAF.
+Liquid-переход — расширяющаяся полупрозрачная плоскость через transform / opacity, без анимированного clip-path на весь экран. Нативный курсор сохраняется, дополнительный щит декоративный; его RAF прекращается в покое и на скрытой вкладке.
+
+Desktop smooth scroll — Lenis lerp .1, dynamic import только fine pointer и non-reduced. Cursor lerp .2, passive listeners / ref, без React setState на каждом кадре; небольшой shield glyph вместо слова «Открыть», магнит8% от pointer displacement. Native cursor остаётся. Cursor-rAF останавливается в покое / скрытой вкладке. Preference / pointer changes корректно пересоздают или убирают effects.
 
 Page transition — неблокирующая overlay clip-path .65s, pointer-events none. Mobile menu morph .45s. Reduced motion: никакого smooth scroll, cursor, breathing или декоративного entry; содержимое и все действия доступны. Не обещать 60fps на каждом устройстве без измерения.
 
 ## Бренд и доверие
 
-ТОО «SYSCORE», БИН260940014470, ОКЭД62092, 11.09.2026, Алматы; реквизиты и телефон из данных владельца. Личные документы публикуются по его разрешению. PhD не равняется сертификации SYSCORE; курс Ethical Hacking не называется CEH. Нет наград без названий и документов. Целевые аудитории МВД/юристы/бизнес — не клиентские логотипы.
+ТОО «SYSCORE», БИН260940014470, ОКЭД62092, 11.09.2026, Алматы; реквизиты и телефон из данных владельца. Показывается квалификация, не полные личные документы. PhD не равняется сертификации SYSCORE; курс Ethical Hacking не называется CEH. Нет наград без подтверждения. Аудитории МВД/юристы/бизнес — не клиентские логотипы. Cisco / Fortinet / MikroTik — направления будущей независимой подготовки, не подтверждённые партнёры.
 
 ## Источники
 
 - [Lenis](https://github.com/darkroomengineering/lenis), MIT — smooth scroll.
 - [Motion layout animations](https://motion.dev/docs/react-layout-animations), MIT library — shared-layout navigation.
 - [Motion accessibility](https://motion.dev/docs/react-accessibility) — reduced-motion contract.
+- [Motion performance](https://motion.dev/docs/performance) — transform / opacity вместо постоянно меняющегося blur и геометрии.
+- [Motion Primitives](https://github.com/ibelick/motion-primitives) — open-source reference для небольших магнитных и shared-layout взаимодействий; дополнительная UI-библиотека не установлена, чужой дизайн не скопирован.
 - [Cloudflare Siteverify](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/) — серверная валидация, а не доверие одному виджету.
 - Manrope / Unbounded: OFL, локальные license-файлы. Дизайн и SVG scenes написаны для этого проекта, не скопированы с чужого сайта.

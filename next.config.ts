@@ -11,7 +11,11 @@ const securityHeaders = [
 ];
 const nextConfig: NextConfig = {
   output: "standalone",
-  images: { formats: ["image/avif", "image/webp"], qualities: [75, 85] },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    qualities: [75, 85],
+    localPatterns: [{ pathname: "/brand/**", search: "" }],
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
@@ -23,10 +27,6 @@ const nextConfig: NextConfig = {
             value: "default-src 'none'; frame-ancestors 'none'",
           },
         ],
-      },
-      {
-        source: "/certificates/:file*.pdf",
-        headers: [{ key: "Content-Type", value: "application/pdf" }],
       },
     ];
   },

@@ -1,6 +1,6 @@
 # SYSCORE
 
-Русскоязычный сайт ТОО «SYSCORE»: Next.js 16 App Router, React 19, TypeScript, Tailwind 4. Фирменная палитра navy / ice / steel / amber, Unbounded + Manrope, Motion и Lenis. Девять содержательных страниц, настоящие документы основателя, серверный модуль обращений.
+Русскоязычный сайт ТОО «SYSCORE»: Next.js 16 App Router, React 19, TypeScript, Tailwind 4. Фирменная палитра navy / ice / steel / amber, Unbounded + Manrope, Motion и Lenis. Девять страниц, профиль квалификации основателя без открытых сканов, концепция киберполигона и серверный модуль обращений.
 
 ## Запуск
 
@@ -23,10 +23,10 @@ npm run start
 ## Контент и документы
 
 - `content/site-content.ts`: компания, тексты, навигация и статусы. Новый интерфейс использует redesign; старые экспортируемые данные оставлены для совместимости неиспользуемых старых компонентов.
-- `content/certificates.ts`: 11 настоящих документов — диплом и 10 сертификатов, названия, организация, год и ссылки проверки. Это личная квалификация основателя, не сертификация компании.
-- `public/certificates/`: оригинальные PDF без изменения байтов, WebP-превью первой страницы. Пользователь явно разрешил публикацию этих документов.
-- `content/certificate-blurs.ts`: маленькие производные превью, не подменяющие оригиналы.
-- `scripts/prepare-certificates.ps1 -SourceDirectory <папка-PDF>` и `scripts/compress-certificates.mjs`: необязательная локальная подготовка из корня репозитория. Первому нужен Poppler / pdftoppm; для второго объявлен sharp. В Vercel эта подготовка НЕ запускается — готовые публичные файлы в Git.
+- `content/certificates.ts`: только названия, организация, год, категория и публичные ссылки проверки для 11 квалификаций. Это личная подготовка основателя, не сертификация компании. В объектах нет путей к сканам, номеров диплома, изображений и PDF.
+- Сканы PDF / WebP удалены из текущего дерева. `public/certificates/` и `private/` исключены из Git; инструменты массовой публикации сканов удалены. Оригиналы остаются у владельца вне репозитория.
+- `proxy.ts` + `lib/document-privacy.ts`: legacy `/certificates/*` и запросы соответствующих превью через `/_next/image` получают410, no-store и noindex. Image localPatterns разрешает только brand-ресурсы. Это блокировка текущего deployment, НЕ очистка истории Git / чужих копий / старых deployment URL.
+- `cyberRange` в `content/site-content.ts`: публичная концепция планируемого полигона. Исходный бизнес-план, коммерческие цифры и спецификация закупки НЕ публикуются. `CyberRange` — интерактивный объяснитель, без запросов к гипервизору и запуска атак.
 - `public/brand/`: исходный PNG логотипа, производный знак и app icon. Нет утверждения, что производный SVG — оригинальный файл бренда.
 - `content/i18n.ts`: контракт ru/en/kk. Переводы EN/KZ ещё не подготовлены; неработающий переключатель языков не показывается.
 - `DESIGN_SYSTEM.md`: спецификация интерфейса для переноса в Figma.
@@ -67,7 +67,13 @@ GitHub `Sshows/Syscore`, ветка main, build command `npm run build`. Git int
 
 В Vercel задайте реальный NEXT_PUBLIC_SITE_URL для Production / Preview и нужные серверные секреты отдельно. Форму держите закрытой, пока всё не проверено. Next nonce требует SSR; API no-store. Новый домен приобретается и DNS / сертификаты настраиваются отдельно владельцем; домен не куплен этим кодом.
 
-Проверить /, /services, /audiences, /education, /company, /founder, /contact, /privacy, /personal-data, /api/health, /sitemap.xml, /robots.txt, /opengraph-image и публичные PDF. CI запускает ci, lint, typecheck, build и production audit.
+Проверить /, /services, /audiences, /education, /company, /founder, /contact, /privacy, /personal-data, /api/health, /sitemap.xml, /robots.txt, /opengraph-image и ответы410 для бывших PDF / WebP / optimized previews. CI запускает ci, lint, typecheck, build и production audit.
+
+## Граница приватности
+
+Удаление файлов из main не стирает исторические commits, старые Vercel deployments, caches или уже скачанные копии. Для снижения доступности старых версий нужны отдельно разрешённые rewrite history / force-push, проверка всех веток и тегов, очистка старых deployments и при необходимости обращения к площадкам об удалении кэшированных объектов. Нельзя обещать полное удаление из интернета. Не загружайте документы снова в public, git, issue или CI artifacts.
+
+Киберполигон не подключён к серверу университета. Cisco / Fortinet / MikroTik — планируемые направления независимой подготовки, не партнёры, не действующие экзаменационные центры. Образы требуют законных лицензий; даты, стоимость и экзамены не обещаются.
 
 ## Оставшиеся данные от владельца
 

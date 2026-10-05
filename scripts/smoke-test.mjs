@@ -26,6 +26,19 @@ for (const path of [
     assert.ok(body.includes("tel:+77027776181"));
     assert.ok(!body.includes("mailto:"));
   }
+  if (path === "/founder") {
+    assert.ok(body.includes("PhD"));
+    assert.ok(body.includes("Оригиналы не публикуются"));
+    assert.ok(!body.includes("/certificates/"));
+    assert.ok(!body.includes("Оригинал PDF"));
+  }
+  if (path === "/") assert.ok(!body.includes("/certificates/"));
+  if (path === "/education") {
+    for (const vendor of ["Cisco", "Fortinet", "MikroTik"])
+      assert.ok(body.includes(vendor));
+    assert.ok(body.includes("не действующая лаборатория"));
+    assert.ok(!body.includes("6200") && !body.includes("6,200"));
+  }
   console.log(`PASS GET ${path}`);
 }
 assert.equal((await fetch(`${base}/api/health`)).status, 200);
@@ -56,11 +69,31 @@ for (const id of [
   "managing-diversity",
 ]) {
   const response = await fetch(base + "/certificates/" + id + ".pdf");
-  assert.equal(response.status, 200);
-  assert.ok(response.headers.get("content-type").startsWith("application/pdf"));
+  assert.equal(response.status, 410);
+  assert.ok(response.headers.get("cache-control").includes("no-store"));
+  assert.ok(response.headers.get("x-robots-tag").includes("noindex"));
   const preview = await fetch(base + "/certificates/" + id + ".webp");
-  assert.equal(preview.status, 200);
+  assert.equal(preview.status, 410);
 }
+for (const encoded of [
+  "%2Fcertificates%2Fphd.webp",
+  "%252Fcertificates%252Fphd.webp",
+])
+  assert.equal(
+    (await fetch(base + "/_next/image?url=" + encoded + "&w=640&q=75")).status,
+    410,
+  );
+assert.equal(
+  (await fetch(base + "/certificates/phd.pdf", { method: "HEAD" })).status,
+  410,
+);
+assert.equal(
+  (await fetch(base + "/brand/syscore-logo-on-navy.png")).status,
+  200,
+);
+console.log(
+  "PASS original scans, previews and legacy optimized image routes retired; brand asset unaffected",
+);
 assert.equal((await fetch(`${base}/not-a-real-page`)).status, 404);
 assert.equal(
   (await fetch(`${base}/api/security-check`, { method: "POST" })).status,

@@ -31,7 +31,13 @@ export default function Services() {
             <p>{item.text}</p>
           </div>
           <div>
-            <p>{item.detail}</p>
+            <div className="service-outcome">
+              <span className="eyebrow">{copy.interface.taskLabel}</span>
+              <p>{item.example}</p>
+              <span className="eyebrow">{copy.interface.resultLabel}</span>
+              <p>{item.outcome}</p>
+            </div>
+            <p className="fine-print">{item.detail}</p>
             <Link
               href={`/contact?topic=${item.id}`}
               className="button button-secondary"

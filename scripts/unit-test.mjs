@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { createRequire } from "node:module";
 import vm from "node:vm";
 import ts from "typescript";
+import { AsyncLocalStorage } from "node:async_hooks";
+// Next normally installs this global during server bootstrap; unit tests run standalone.
+globalThis.AsyncLocalStorage ??= AsyncLocalStorage;
 const require = createRequire(import.meta.url);
 // Compile the actual source in-memory. No fixtures are sent to external services.
 async function load(path, overrides = {}, env = {}) {
@@ -33,13 +36,74 @@ const { certificates } = await load("content/certificates.ts");
 assert.equal(certificates.length, 11);
 for (const item of certificates) {
   assert.ok(item.title && item.issuer && item.year);
-  assert.ok(
-    (await readFile("public/certificates/" + item.pdf)).byteLength > 100,
+  for (const key of ["pdf", "image", "rotation"])
+    assert.equal(key in item, false);
+  if (item.verify) assert.equal(new URL(item.verify).hostname, "coursera.org");
+}
+const publicDocuments = await readdir("public/certificates").catch((error) => {
+  if (error.code === "ENOENT") return [];
+  throw error;
+});
+assert.equal(publicDocuments.length, 0);
+const { isRetiredDocumentPath } = await load("lib/document-privacy.ts");
+for (const path of [
+  "/certificates/phd.pdf",
+  "/certificates/phd.webp",
+  "/certificates",
+  "%2Fcertificates%2Fphd.webp",
+  "%252Fcertificates%252Fphd.webp",
+  "https://syscore-blond.vercel.app/certificates/phd.webp",
+  "/CERTIFICATES/phd.pdf",
+])
+  assert.equal(isRetiredDocumentPath(path), true, path);
+for (const path of [
+  "/brand/syscore-mark.svg",
+  "/education",
+  "/founder#documents",
+  "/certificates-other/a.png",
+])
+  assert.equal(isRetiredDocumentPath(path), false, path);
+const { proxy, config } = await load("proxy.ts", {
+  "@/lib/document-privacy": { isRetiredDocumentPath },
+});
+const { NextRequest } = require("next/server");
+// The installed Next release still exports the matcher under its historical name.
+const {
+  unstable_doesMiddlewareMatch: matchesProxy,
+} = require("next/experimental/testing/server");
+for (const path of [
+  "/certificates/phd.pdf",
+  "/certificates/phd.webp",
+  "/_next/image?url=%2Fcertificates%2Fphd.webp&w=640&q=75",
+  "/_next/image?url=%252Fcertificates%252Fphd.webp&w=640&q=75",
+  "/_next/image?url=%2Fbrand%2Fsyscore-mark.svg&url=%2Fcertificates%2Fphd.webp",
+]) {
+  assert.equal(matchesProxy({ config, nextConfig: {}, url: path }), true);
+  const response = proxy(
+    new NextRequest("https://syscore-blond.vercel.app" + path),
   );
+  assert.equal(response.status, 410);
+  assert.ok(response.headers.get("cache-control").includes("no-store"));
+  assert.ok(response.headers.get("x-robots-tag").includes("noindex"));
+}
+const { cyberRange, redesign } = await load("content/site-content.ts");
+assert.equal(cyberRange.tracks.length, 3);
+assert.deepEqual(
+  Array.from(cyberRange.tracks, (item) => item.id),
+  ["cisco", "fortinet", "mikrotik"],
+);
+for (const stage of cyberRange.stages)
+  assert.ok(cyberRange.topology.some((node) => node.id === stage.node));
+for (const layer of redesign.coreLayers) {
+  assert.ok(layer.summary && layer.result && layer.action);
   assert.ok(
-    (await readFile("public/certificates/" + item.image)).byteLength > 100,
+    redesign.services.items.some((item) => layer.href.endsWith("#" + item.id)),
   );
 }
+assert.ok(cyberRange.noExecution.includes("не запускаются"));
+console.log(
+  "PASS private document URLs and optimizer routes blocked; qualifications metadata-only; planned range content consistent",
+);
 const lead = {
   name: "Test\u0000 User",
   phone: "+77000000000",

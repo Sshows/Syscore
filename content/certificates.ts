@@ -4,9 +4,6 @@ export type Certificate = {
   issuer: string;
   year: number;
   category: "security" | "education" | "degree";
-  pdf: string;
-  image: string;
-  rotation?: number; // Original scan orientation; rendered WebP is already upright.
   verify?: string;
 };
 export const certificates: Certificate[] = [
@@ -17,8 +14,6 @@ export const certificates: Certificate[] = [
       "Комитет по обеспечению качества в сфере образования и науки МОН РК · правоохранительная деятельность",
     year: 2021,
     category: "degree",
-    pdf: "phd.pdf",
-    image: "phd.webp",
   },
   {
     id: "ethical-hacking",
@@ -26,8 +21,6 @@ export const certificates: Certificate[] = [
     issuer: "Coursera · специализация, 4 курса",
     year: 2026,
     category: "security",
-    pdf: "ethical-hacking.pdf",
-    image: "ethical-hacking.webp",
     verify: "https://coursera.org/verify/specialization/RQI7K5JTAMZK",
   },
   {
@@ -36,9 +29,6 @@ export const certificates: Certificate[] = [
     issuer: "Воронежский институт МВД России · 72 часа",
     year: 2012,
     category: "security",
-    pdf: "investigation.pdf",
-    image: "investigation.webp",
-    rotation: 90,
   },
   {
     id: "communication",
@@ -46,9 +36,6 @@ export const certificates: Certificate[] = [
     issuer: "TİKA / Turkish National Police",
     year: 2011,
     category: "security",
-    pdf: "communication.pdf",
-    image: "communication.webp",
-    rotation: -90,
   },
   {
     id: "ord",
@@ -56,9 +43,6 @@ export const certificates: Certificate[] = [
     issuer: "Global Professional Development · 72 часа",
     year: 2022,
     category: "security",
-    pdf: "ord.pdf",
-    image: "ord.webp",
-    rotation: 90,
   },
   {
     id: "ai",
@@ -66,8 +50,6 @@ export const certificates: Certificate[] = [
     issuer: "DeepLearning.AI / Coursera",
     year: 2026,
     category: "education",
-    pdf: "ai.pdf",
-    image: "ai.webp",
     verify: "https://coursera.org/verify/E1XTM7FYB0JS",
   },
   {
@@ -76,9 +58,6 @@ export const certificates: Certificate[] = [
     issuer: "КазНУ имени аль-Фараби · 72 часа",
     year: 2021,
     category: "education",
-    pdf: "digital-learning.pdf",
-    image: "digital-learning.webp",
-    rotation: 90,
   },
   {
     id: "blended-learning",
@@ -86,8 +65,6 @@ export const certificates: Certificate[] = [
     issuer: "Coursera",
     year: 2026,
     category: "education",
-    pdf: "blended-learning.pdf",
-    image: "blended-learning.webp",
     verify: "https://coursera.org/verify/R4720WNP6T2B",
   },
   {
@@ -96,8 +73,6 @@ export const certificates: Certificate[] = [
     issuer: "University of Cape Town / Coursera",
     year: 2026,
     category: "education",
-    pdf: "disability-inclusion.pdf",
-    image: "disability-inclusion.webp",
     verify: "https://coursera.org/verify/9G8V4UDLJ9DN",
   },
   {
@@ -106,8 +81,6 @@ export const certificates: Certificate[] = [
     issuer: "ESSEC Business School / Coursera",
     year: 2026,
     category: "education",
-    pdf: "diversity.pdf",
-    image: "diversity.webp",
     verify: "https://coursera.org/verify/2YZAHWIOJM00",
   },
   {
@@ -116,8 +89,6 @@ export const certificates: Certificate[] = [
     issuer: "Starweaver / Coursera",
     year: 2026,
     category: "education",
-    pdf: "managing-diversity.pdf",
-    image: "managing-diversity.webp",
     verify: "https://coursera.org/verify/NE83O1V8KO3A",
   },
 ];
